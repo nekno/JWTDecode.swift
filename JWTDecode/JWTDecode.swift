@@ -78,6 +78,17 @@ public struct Claim {
 
         /// raw value of the claim
     let value: Any?
+    
+    public func valueAs<T>() -> T? {
+        return value as? T
+    }
+    
+    public func valueAs<T: ExpressibleByStringLiteral>() -> T? {
+        let val: T?
+        if let string = self.string {
+            val = T.init(stringLiteral: string)
+        }
+    }
 
         /// value of the claim as `String`
     public var string: String? {
